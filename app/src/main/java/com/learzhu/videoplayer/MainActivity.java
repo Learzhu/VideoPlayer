@@ -1,6 +1,8 @@
 package com.learzhu.videoplayer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,7 +12,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button jcVideoPlayerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        initViews();
+    }
 
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
+    private void initViews() {
+        jcVideoPlayerBtn = (Button) findViewById(R.id.jcvideoplayer_btn);
+        jcVideoPlayerBtn.setOnClickListener(this);
     }
 
     @Override
@@ -45,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -53,4 +58,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.jcvideoplayer_btn:
+                Intent mIntent = new Intent(MainActivity.this, JieCaoVideoPlayerActivity.class);
+                startActivity(mIntent);
+                break;
+        }
+    }
 }
